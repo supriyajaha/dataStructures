@@ -15,39 +15,39 @@ public class LinkedList {
         }
     }
 
-    public void push(int data){
+    public void push(int data) {
         Node temp = new Node(data);
         temp.next = head;
         head = temp;
     }
 
-    public void append(int data){
-        Node temp =new Node(data);
-        if(head==null){
-            head=temp;
-        }else{
+    public void append(int data) {
+        Node temp = new Node(data);
+        if (head == null) {
+            head = temp;
+        } else {
             Node last = head;
-            while(last.next!=null){
-                last=last.next;
+            while (last.next != null) {
+                last = last.next;
             }
-            last.next=temp;
+            last.next = temp;
         }
     }
 
-    public int getLengthIterative(){
+    public int getLengthIterative() {
         Node temp = head;
-        int count=0;
-        while(temp!=null){
+        int count = 0;
+        while (temp != null) {
             count++;
-            temp=temp.next;
+            temp = temp.next;
         }
         return count;
     }
 
-    private int getLengthRecursive(Node node){
-        if(node == null)
+    private int getLengthRecursive(Node node) {
+        if (node == null)
             return 0;
-        return getLengthRecursive(node.next)+1;
+        return getLengthRecursive(node.next) + 1;
     }
 
     public void display() {
@@ -58,22 +58,22 @@ public class LinkedList {
         }
     }
 
-    public boolean searchIterative(int data){
+    public boolean searchIterative(int data) {
         Node temp = head;
-        while(temp!=null){
-            if(temp.data==data)
+        while (temp != null) {
+            if (temp.data == data)
                 return true;
-            temp=temp.next;
+            temp = temp.next;
         }
         return false;
     }
 
-    private boolean searchRecursive(int data,Node node){
-        if(node == null)
+    private boolean searchRecursive(int data, Node node) {
+        if (node == null)
             return false;
-        if(node.data==data)
+        if (node.data == data)
             return true;
-        return searchRecursive(data,node.next);
+        return searchRecursive(data, node.next);
     }
 
     /**
@@ -84,58 +84,85 @@ public class LinkedList {
      * 5. First change next of previous pointers, then change next of current pointers
      */
 
-    public void swap(int data1,int data2){
+    public void swap(int data1, int data2) {
         boolean flag = false;
-        Node prev1=null,prev2=null,prev=null,curr1=null,curr2=null,temp=head;
-        if(data1==data2)
+        Node prev1 = null, prev2 = null, prev = null, curr1 = null, curr2 = null, temp = head;
+        if (data1 == data2)
             return;
-        while(temp!=null){
-            if(temp.data == data1 || temp.data == data2){
-                if(!flag){
-                    prev1=prev;
-                    curr1=temp;
-                    flag=true;
-                }else{
-                    prev2=prev;
-                    curr2=temp;
+        while (temp != null) {
+            if (temp.data == data1 || temp.data == data2) {
+                if (!flag) {
+                    prev1 = prev;
+                    curr1 = temp;
+                    flag = true;
+                } else {
+                    prev2 = prev;
+                    curr2 = temp;
                     break;
                 }
             }
-            prev=temp;
-            temp=temp.next;
+            prev = temp;
+            temp = temp.next;
         }
-        if(temp==null)
+        if (temp == null)
             return;
-        if(prev1!=null){
-            prev1.next=curr2;
-        }else{
-            head=curr2;
+        if (prev1 != null) {
+            prev1.next = curr2;
+        } else {
+            head = curr2;
         }
-        prev2.next=curr1;
-        temp=curr2.next;
-        curr2.next=curr1.next;
-        curr1.next=temp;
+        prev2.next = curr1;
+        temp = curr2.next;
+        curr2.next = curr1.next;
+        curr1.next = temp;
     }
 
     public int getMiddleNode() throws Exception {
-        Node slow = head,fast=head;
-        while(fast!=null && fast.next!=null){
-            slow=slow.next;
-            fast=fast.next.next;
+        Node slow = head, fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        if(slow!=null)
+        if (slow != null)
             return slow.data;
         else
             throw new Exception("Linked list is empty");
     }
 
-    public static void main(String[] args) throws Exception {
-        LinkedList linkedList = new LinkedList();
-        linkedList.append(1);
-        linkedList.append(2);
-        linkedList.append(3);
-        linkedList.append(4);
-        linkedList.append(5);
-        System.out.println(linkedList.getMiddleNode());
+    public void printNthNode_iterative(int n) {
+        int length = getLengthIterative();
+        Node temp = head;
+        if (length > n) {
+            n = length - n + 1;
+            while (n > 1) {
+                temp = temp.next;
+                n--;
+            }
+            System.out.println(temp.data);
+        }
+    }
+
+    /**
+     * 1. Maintain two pointers – reference pointer and main pointer.
+     * 2. Initialize both reference and main pointers to head.
+     * 3. First move reference pointer to n nodes from head.
+     * 4. Now move both pointers one by one until reference pointer reaches end.
+     * 5. Now main pointer will point to nth node from the end.
+     * 6. Return main pointer.
+     */
+    public void printNthNode_optimized(int n){
+        Node main_ptr=head,ref_ptr=head;
+        int count=1;
+        while(ref_ptr!=null && count!=n){
+            count++;
+            ref_ptr=ref_ptr.next;
+        }
+        if(ref_ptr==null)
+            return;
+        while(ref_ptr.next!=null){
+            ref_ptr=ref_ptr.next;
+            main_ptr = main_ptr.next;
+        }
+        System.out.println(main_ptr.data);
     }
 }
