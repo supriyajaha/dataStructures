@@ -129,6 +129,10 @@ public class LinkedList {
             throw new Exception("Linked list is empty");
     }
 
+    /**
+     *
+     * TC - O(2n)
+     */
     public void printNthNode_iterative(int n) {
         int length = getLengthIterative();
         Node temp = head;
@@ -149,6 +153,7 @@ public class LinkedList {
      * 4. Now move both pointers one by one until reference pointer reaches end.
      * 5. Now main pointer will point to nth node from the end.
      * 6. Return main pointer.
+     * TC - O(n)
      */
     public void printNthNode_optimized(int n){
         Node main_ptr=head,ref_ptr=head;
@@ -164,5 +169,19 @@ public class LinkedList {
             main_ptr = main_ptr.next;
         }
         System.out.println(main_ptr.data);
+    }
+
+    /*
+    TC - O(n)
+     */
+    public int count(int data){
+        Node temp=head;
+        int count=0;
+        while(temp!=null){
+            if(temp.data==data)
+                count++;
+            temp=temp.next;
+        }
+        return count;
     }
 }

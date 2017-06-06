@@ -4,10 +4,10 @@
 public class Main {
     public static void main(String[] args) throws Exception {
         LinkedList linkedList = new LinkedList();
-        int[] arr = new int[]{1,2,3, 4, 5, 6, 7, 8, 9};
+        int[] arr = new int[]{1,2,1,2,1,3,1};
         for(int input:arr){
            linkedList.append(input);
         }
-        linkedList.printNthNode_optimized(9);
+        System.out.println(linkedList.count(1));
     }
 }
