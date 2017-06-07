@@ -184,4 +184,19 @@ public class LinkedList {
         }
         return count;
     }
+    
+    /* TC - O(n) */
+    public void reverse(){
+        if(head!=null){
+            Node curr=head.next,prev=head,next;
+            while(curr!=null){
+                next=curr.next;
+                curr.next=prev;
+                if(prev==head)
+                    prev.next=null;
+                prev=curr;
+                curr=next;
+            }
+            head=prev;
+        }
 }
