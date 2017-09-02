@@ -130,7 +130,6 @@ public class LinkedList {
     }
 
     /**
-     *
      * TC - O(2n)
      */
     public void printNthNode_iterative(int n) {
@@ -155,17 +154,17 @@ public class LinkedList {
      * 6. Return main pointer.
      * TC - O(n)
      */
-    public void printNthNode_optimized(int n){
-        Node main_ptr=head,ref_ptr=head;
-        int count=1;
-        while(ref_ptr!=null && count!=n){
+    public void printNthNode_optimized(int n) {
+        Node main_ptr = head, ref_ptr = head;
+        int count = 1;
+        while (ref_ptr != null && count != n) {
             count++;
-            ref_ptr=ref_ptr.next;
+            ref_ptr = ref_ptr.next;
         }
-        if(ref_ptr==null)
+        if (ref_ptr == null)
             return;
-        while(ref_ptr.next!=null){
-            ref_ptr=ref_ptr.next;
+        while (ref_ptr.next != null) {
+            ref_ptr = ref_ptr.next;
             main_ptr = main_ptr.next;
         }
         System.out.println(main_ptr.data);
@@ -174,29 +173,30 @@ public class LinkedList {
     /*
     TC - O(n)
      */
-    public int count(int data){
-        Node temp=head;
-        int count=0;
-        while(temp!=null){
-            if(temp.data==data)
+    public int count(int data) {
+        Node temp = head;
+        int count = 0;
+        while (temp != null) {
+            if (temp.data == data)
                 count++;
-            temp=temp.next;
+            temp = temp.next;
         }
         return count;
     }
-    
+
     /* TC - O(n) */
-    public void reverse(){
-        if(head!=null){
-            Node curr=head.next,prev=head,next;
-            while(curr!=null){
-                next=curr.next;
-                curr.next=prev;
-                if(prev==head)
-                    prev.next=null;
-                prev=curr;
-                curr=next;
+    public void reverse() {
+        if (head != null) {
+            Node curr = head.next, prev = head, next;
+            while (curr != null) {
+                next = curr.next;
+                curr.next = prev;
+                if (prev == head)
+                    prev.next = null;
+                prev = curr;
+                curr = next;
             }
-            head=prev;
+            head = prev;
         }
+    }
 }
